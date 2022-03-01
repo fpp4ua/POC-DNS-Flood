@@ -13,7 +13,7 @@ import json
 import random
 import time
 import multiprocessing
-from scapy.all import conf, send, IP, UDP, DNS, DNSQR
+from scapy.all import conf, send, IP, UDP, DNS, DNSQR, RandShort
 
 
 FPP_INTERVAL_MS = float(os.getenv("FPP_INTERVAL_MS", "500")) / 1000
@@ -38,8 +38,9 @@ def udpsend(e):
             counter += 1
             print(counter, "From:", src_ip, "To:", dst_ip, "Query:", dst_domain)
         try:
-            pkt = IP(dst=dst_ip,src=src_ip)/UDP(sport=53, dport=53)/DNS(rd=1,qd=DNSQR(qname=dst_domain,qtype="TXT"))
-            s.send(pkt)
+            pkt = IP(dst=dst_ip,src=src_ip)/UDP(sport=53, dport=53)/DNS(id=RandShort(),rd=1,qd=DNSQR(qname=dst_domain,qtype="TXT"))
+            for a in range(0,20):
+                s.send(pkt)
         except Exception as e:
             print(e)
 
