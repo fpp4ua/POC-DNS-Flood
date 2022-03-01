@@ -29,4 +29,7 @@ sudo python3 main.py
 ## Options
 
 `FPP_INTERVAL_MS` - set the sending frequency in milliseconds, defaults to 500ms (half a second)
+
 `DO_PRINT` - set to "f" to turn off printing to standard out, defaults to "t" (prints out)
+
+`SPOOF_SRC` - set to "t" to attempt to spoof the source IP, defaults to "f" (no spoofing)
